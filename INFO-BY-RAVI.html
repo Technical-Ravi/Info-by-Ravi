@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAVI KING - MY INFO </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* MAIN Background Image */
+        #legend-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/hFQnZHP1/0897592b9e1c6ee5edb2311324ef71e1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: brightness(0.85); /* Clean look without extra saturation */
+            z-index: -4;
+        }
+
+        /* INTRO SCREEN (Overlays the whole site at first) */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Stays on top */
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        .intro-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .intro-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* MAIN CONTENT SCROLL WRAPPER (Hidden initially) */
+        .scroll-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; /* Hidden until intro is clicked */
+            visibility: hidden;
+            transition: opacity 1s ease-in 0.5s, visibility 1s ease-in 0.5s;
+        }
+
+        /* PURE GLASSMORPHISM CARD STYLE */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            width: 100%;
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+            text-align: left;
+            padding: 0 10px;
+        }
+
+        .bio p {
+            margin-bottom: 5px;
+        }
+
+        .bio strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .attitude-text {
+            display: block;
+            margin-top: 15px;
+            font-style: italic;
+            color: #d1d1d1;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
+
+        /* Contact Me Button */
+        .button {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* MYTHIC INFO GRID (Bottom Section) */
+        .grid-container {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .grid-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .grid-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Logos Inside Bottom Cards - FIXED CROP ISSUE */
+        .grid-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain; /* Ensures the logo fits perfectly without cutting */
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); /* Clean shadow instead of border */
+        }
+
+        .grid-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .grid-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: #ffffff;
+        }
+
+        .grid-card p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Hidden Audio Element */
+        #bg-audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Layer -->
+    <div id="legend-bg"></div>
+
+    <!-- Hidden Audio Player -->
+    <audio id="bg-audio" loop>
+        <source src="https://files.catbox.moe/r6xf00.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Intro Screen -->
+    <div id="intro-screen">
+        <button class="intro-btn" onclick="enterSite()">View Intro by Ravi</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="scroll-container" id="main-content">
+        
+        <!-- Main Profile Glass Card (Top) -->
+        <div class="glass-card">
+            <h1>RAVI KING</h1>
+            <p style="font-size: 14px; margin-bottom: 25px; color: rgba(255,255,255,0.7);">The Legendary Digital Creator Experience</p>
+
+            <div class="bio">
+                <p><strong>Title:</strong> The Mythic Warrior (Creative Mastermind) </p>
+                <p><strong>Age:</strong> 22 | <strong>City:</strong> Mumbai, India</p>
+                <p><strong>Skills:</strong> Web Dev, Graphic Design, Digital Marketing</p>
+                
+                <!-- Added "Work" and "Vibe" Section -->
+                <p><strong>Work:</strong> Kuch nahi, bas aawargi aur duniya explore karta hoon! </p>
+                <p><strong>Vibe:</strong> Ek number ka bindass insaan, doston ki jaan aur dushmano ke liye toofan! </p>
+                
+                <!-- Tagda Hinglish Attitude/Shayari -->
+                <span class="attitude-text">
+                    "Log aag se jalte hain, aur hum apne naam se...<br>
+                    Welcome to my world, jahan rules main banata hoon."
+                </span>
+            </div>
+
+            <!-- Contact Me Button -->
+            <a href="mailto:technicalravi2224@gmail.com" class="button">Contact Me</a>
+        </div>
+
+        <!-- Mythic Edition Section (Bottom) -->
+        <h2>MYTHIC ULTRA OP EDITION</h2>
+        
+        <!-- Glassmorphism Vertical Cards with Logos -->
+        <div class="grid-container">
+            
+            <a href="javascript:void(0)" onclick="openWhatsApp()" class="grid-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <h4>WhatsApp</h4>
+                <p>Message Me</p>
+            </a>
+
+            <a href="javascript:void(0)" onclick="openInstagram()" class="grid-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram">
+                <h4>Instagram</h4>
+                <p>View Profile</p>
+            </a>
+
+            <a href="javascript:void(0)" onclick="openFacebook()" class="grid-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook">
+                <h4>Facebook</h4>
+                <p>View Profile</p>
+            </a>
+
+            <!-- Updated YouTube Logo -->
+            <a href="javascript:void(0)" onclick="openYouTube()" class="grid-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
+                <h4>YouTube</h4>
+                <p>View Channel</p>
+            </a>
+            
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Intro Button Logic & Music Play
+        function enterSite() {
+            // Play Music
+            var audio = document.getElementById("bg-audio");
+            audio.play();
+
+            // Hide Intro Screen
+            var introScreen = document.getElementById("intro-screen");
+            introScreen.style.opacity = '0';
+            introScreen.style.visibility = 'hidden';
+
+            // Show Main Content
+            var mainContent = document.getElementById("main-content");
+            mainContent.style.visibility = 'visible';
+            mainContent.style.opacity = '1';
+        }
+
+        // Social Links Logic
+        const WA_NUMBER = '919579464434';
+        const WA_MESSAGE = '*HELLO SIR CAN YOU TEACH ME ABOUT THIS ?? MY NAME IS....*';
+        const FB_URL = 'https://www.facebook.com/profile.php?id=100000724942878';
+        const IG_URL = 'https://www.instagram.com/_13.aasiq?igsh=OXR3bnB5bGQ5bWo4';
+        const YT_URL = 'https://youtube.com/@poison.editx.143?si=iWHSLfYmTaPJtUP6';
+
+        function openWhatsApp() { window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`, '_blank'); }
+        function openFacebook() { window.open(FB_URL, '_blank'); }
+        function openInstagram() { window.open(IG_URL, '_blank'); }
+        function openYouTube() { window.open(YT_URL, '_blank'); }
+    </script>
+</body>
+</html>
