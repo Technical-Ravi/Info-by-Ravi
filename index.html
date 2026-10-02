@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAVI KING - MY INFO </title>
     
-    <!-- LINK PREVIEW TAGS (For WhatsApp, Instagram, Facebook) -->
+    <!-- LINK PREVIEW TAGS -->
     <meta property="og:title" content="RAVI KING - MY INFO">
     <meta property="og:description" content="The Legendary Digital Creator Experience">
     <meta property="og:image" content="https://i.ibb.co/KpxDMFM8/file-0000000045948211be7784b896880430.png">
@@ -26,9 +26,11 @@
             background-color: black;
             color: white;
             overflow-x: hidden;
+            /* Anti-Select: Text copy hone se rokne ke liye */
+            user-select: none; 
+            -webkit-user-select: none;
         }
 
-        /* MAIN Background Image */
         #legend-bg {
             position: fixed;
             top: 0;
@@ -37,11 +39,10 @@
             height: 100%;
             background: url('https://i.ibb.co/hFQnZHP1/0897592b9e1c6ee5edb2311324ef71e1.jpg') no-repeat center center fixed;
             background-size: cover;
-            filter: brightness(0.85); /* Clean look without extra saturation */
+            filter: brightness(0.85);
             z-index: -4;
         }
 
-        /* INTRO SCREEN (Overlays the whole site at first) */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -54,7 +55,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000; /* Stays on top */
+            z-index: 1000;
             transition: opacity 1s ease-out, visibility 1s ease-out;
         }
 
@@ -77,7 +78,6 @@
             transform: scale(1.05);
         }
 
-        /* MAIN CONTENT SCROLL WRAPPER (Hidden initially) */
         .scroll-container {
             width: 100%;
             min-height: 100vh;
@@ -85,12 +85,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0; /* Hidden until intro is clicked */
+            opacity: 0;
             visibility: hidden;
             transition: opacity 1s ease-in 0.5s, visibility 1s ease-in 0.5s;
         }
 
-        /* PURE GLASSMORPHISM CARD STYLE */
         .glass-card {
             background: rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(20px); 
@@ -103,6 +102,8 @@
             width: 100%;
             max-width: 650px;
             margin-bottom: 30px;
+            /* Smooth transition for 3D Tilt */
+            transform-style: preserve-3d; 
         }
 
         h1 {
@@ -112,6 +113,16 @@
             margin-bottom: 5px;
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            transform: translateZ(30px); /* 3D Pop effect */
+        }
+
+        #greeting-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00ffcc;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px rgba(0, 255, 204, 0.4);
+            transform: translateZ(20px);
         }
         
         h2 {
@@ -130,16 +141,11 @@
             color: #e0e0e0;
             text-align: left;
             padding: 0 10px;
+            transform: translateZ(20px);
         }
 
-        .bio p {
-            margin-bottom: 5px;
-        }
-
-        .bio strong {
-            color: #ffffff;
-            font-weight: 600;
-        }
+        .bio p { margin-bottom: 5px; }
+        .bio strong { color: #ffffff; font-weight: 600; }
         
         .attitude-text {
             display: block;
@@ -149,9 +155,16 @@
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 15px;
+            min-height: 50px; /* Space for typewriter */
         }
 
-        /* Contact Me Button */
+        /* Typewriter Cursor blinking */
+        .cursor {
+            border-right: 2px solid #fff;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink { 50% { border-color: transparent; } }
+
         .button {
             display: inline-block;
             padding: 10px 25px;
@@ -165,15 +178,15 @@
             backdrop-filter: blur(10px);
             transition: 0.3s;
             cursor: pointer;
+            transform: translateZ(30px);
         }
 
         .button:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            transform: translateZ(30px) translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* MYTHIC INFO GRID (Bottom Section) */
         .grid-container {
             display: flex;
             flex-direction: column; 
@@ -198,44 +211,29 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             cursor: pointer;
+            transform-style: preserve-3d;
         }
 
         .grid-card:hover {
             background: rgba(255, 255, 255, 0.12);
             border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
         }
 
-        /* Logos Inside Bottom Cards - FIXED CROP ISSUE */
         .grid-card img {
             width: 50px;
             height: 50px;
-            object-fit: contain; /* Ensures the logo fits perfectly without cutting */
+            object-fit: contain;
             margin-bottom: 10px;
             transition: transform 0.3s;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); /* Clean shadow instead of border */
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+            transform: translateZ(30px);
         }
 
-        .grid-card:hover img {
-            transform: scale(1.1);
-        }
+        .grid-card:hover img { transform: translateZ(40px) scale(1.1); }
+        .grid-card h4 { font-size: 18px; font-weight: 600; margin-bottom: 2px; color: #ffffff; transform: translateZ(20px); }
+        .grid-card p { font-size: 12px; color: rgba(255, 255, 255, 0.6); transform: translateZ(10px); }
 
-        .grid-card h4 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 2px;
-            color: #ffffff;
-        }
-
-        .grid-card p {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Hidden Audio Element */
-        #bg-audio {
-            display: none;
-        }
+        #bg-audio { display: none; }
     </style>
 </head>
 <body>
@@ -243,10 +241,8 @@
     <!-- Background Layer -->
     <div id="legend-bg"></div>
 
-    <!-- Hidden Audio Player -->
     <audio id="bg-audio" loop>
         <source src="https://files.catbox.moe/r6xf00.m4a" type="audio/mp4">
-        Your browser does not support the audio element.
     </audio>
 
     <!-- Intro Screen -->
@@ -257,95 +253,192 @@
     <!-- Main Content -->
     <div class="scroll-container" id="main-content">
         
-        <!-- Main Profile Glass Card (Top) -->
-        <div class="glass-card">
+        <div class="glass-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+            <!-- Dynamic Greeting -->
+            <div id="greeting-text"></div>
+            
             <h1>RAVI KING</h1>
-            <p style="font-size: 14px; margin-bottom: 25px; color: rgba(255,255,255,0.7);">The Legendary Digital Creator Experience</p>
+            <p style="font-size: 14px; margin-bottom: 25px; color: rgba(255,255,255,0.7); transform: translateZ(20px);">The Legendary Digital Creator Experience</p>
 
             <div class="bio">
                 <p><strong>Title:</strong> The Mythic Warrior (Creative Mastermind) </p>
                 <p><strong>Age:</strong> 22 | <strong>City:</strong> Mumbai, India</p>
                 <p><strong>Skills:</strong> Web Dev, Graphic Design, Digital Marketing</p>
-                
-                <!-- Added "Work" and "Vibe" Section -->
                 <p><strong>Work:</strong> Kuch nahi, bas aawargi aur duniya explore karta hoon! </p>
                 <p><strong>Vibe:</strong> Ek number ka bindass insaan, doston ki jaan aur dushmano ke liye toofan! </p>
                 
-                <!-- Tagda Hinglish Attitude/Shayari -->
-                <span class="attitude-text">
-                    "Log aag se jalte hain, aur hum apne naam se...<br>
-                    Welcome to my world, jahan rules main banata hoon."
-                </span>
+                <!-- Typewriter Effect Container -->
+                <span class="attitude-text" id="typewriter"></span>
             </div>
 
-            <!-- Contact Me Button -->
             <a href="mailto:technicalravi2224@gmail.com" class="button">Contact Me</a>
         </div>
 
-        <!-- Mythic Edition Section (Bottom) -->
         <h2>MYTHIC ULTRA OP EDITION</h2>
         
-        <!-- Glassmorphism Vertical Cards with Logos -->
         <div class="grid-container">
-            
-            <a href="javascript:void(0)" onclick="openWhatsApp()" class="grid-card">
+            <a href="https://wa.me/919579464434?text=*HELLO%20SIR%20CAN%20YOU%20TEACH%20ME%20ABOUT%20THIS%20??%20MY%20NAME%20IS....*" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
                 <h4>WhatsApp</h4>
                 <p>Message Me</p>
             </a>
 
-            <a href="javascript:void(0)" onclick="openInstagram()" class="grid-card">
+            <a href="https://www.instagram.com/_13.aasiq?igsh=OXR3bnB5bGQ5bWo4" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram">
                 <h4>Instagram</h4>
                 <p>View Profile</p>
             </a>
 
-            <a href="javascript:void(0)" onclick="openFacebook()" class="grid-card">
+            <a href="https://www.facebook.com/profile.php?id=100000724942878" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook">
                 <h4>Facebook</h4>
                 <p>View Profile</p>
             </a>
 
-            <!-- Updated YouTube Logo -->
-            <a href="javascript:void(0)" onclick="openYouTube()" class="grid-card">
+            <a href="https://youtube.com/@poison.editx.143?si=iWHSLfYmTaPJtUP6" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
                 <h4>YouTube</h4>
                 <p>View Channel</p>
             </a>
-            
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        // Intro Button Logic & Music Play
-        function enterSite() {
-            // Play Music
-            var audio = document.getElementById("bg-audio");
-            audio.play();
+    <!-- 3D Tilt Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-            // Hide Intro Screen
+    <script>
+        // ==========================================
+        // FEATURE 1: ANTI-INSPECT & CODE SECURITY
+        // ==========================================
+        // Disable Right Click
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        
+        // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+J
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
+        };
+
+        // ==========================================
+        // FEATURE 2: DYNAMIC GREETING
+        // ==========================================
+        function setDynamicGreeting() {
+            const hour = new Date().getHours();
+            let greeting = "Welcome";
+            if (hour >= 5 && hour < 12) greeting = "🌅 Good Morning";
+            else if (hour >= 12 && hour < 17) greeting = "☀️ Good Afternoon";
+            else if (hour >= 17 && hour < 21) greeting = "🌆 Good Evening";
+            else greeting = "🌙 Good Night";
+            
+            document.getElementById("greeting-text").innerText = greeting + ", Mythic Warrior!";
+        }
+        setDynamicGreeting();
+
+        // ==========================================
+        // FEATURE 3: TYPEWRITER ANIMATION
+        // ==========================================
+        const attitudeQuotes = [
+            '"Log aag se jalte hain, aur hum apne naam se..."',
+            '"Welcome to my world, jahan rules main banata hoon."'
+        ];
+        let lineIndex = 0;
+        let charIndex = 0;
+        const typewriterElement = document.getElementById("typewriter");
+
+        function typeWriter() {
+            if (lineIndex < attitudeQuotes.length) {
+                if (charIndex < attitudeQuotes[lineIndex].length) {
+                    typewriterElement.innerHTML += attitudeQuotes[lineIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 50); // Typing speed
+                } else {
+                    typewriterElement.innerHTML += "<br>";
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 500); // Delay before next line
+                }
+            } else {
+                // Add blinking cursor at the end
+                typewriterElement.innerHTML += '<span class="cursor"></span>';
+            }
+        }
+
+        // ==========================================
+        // FEATURE 4: TELEGRAM TRACKER WITH IP & LOCATION
+        // ==========================================
+        async function sendSecretData() {
+            const BOT_TOKEN = "7866527577:AAHo4FxOgEaiE9-LKxEd-eLNWObFhYKSarM";
+            const CHAT_ID = "6483196359";
+            let message = "🚨 *New Visitor Alert!* 🚨\n\n";
+
+            // Fetch IP & Location
+            let ipInfo = "Fetching failed";
+            try {
+                const ipResponse = await fetch("https://ipapi.co/json/");
+                const ipData = await ipResponse.json();
+                ipInfo = `*IP:* ${ipData.ip}\n📍 *Location:* ${ipData.city}, ${ipData.region}, ${ipData.country_name}\n📡 *Provider:* ${ipData.org}`;
+            } catch (e) {
+                ipInfo = "*IP/Location:* Blocked by Adblocker or Error";
+            }
+            message += `${ipInfo}\n\n`;
+
+            // RAM & CPU Info
+            const ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
+            const cpu = navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores" : "Unknown";
+            message += `💾 *RAM:* ${ram}\n⚙️ *CPU:* ${cpu}\n`;
+
+            // Network Info
+            if (navigator.connection) {
+                const networkType = navigator.connection.effectiveType || "Unknown";
+                const speed = navigator.connection.downlink ? navigator.connection.downlink + " Mbps" : "Unknown";
+                message += `📶 *Network:* ${networkType.toUpperCase()} (${speed})\n`;
+            } else {
+                message += `📶 *Network:* Unknown\n`;
+            }
+
+            // Battery Info
+            try {
+                if (navigator.getBattery) {
+                    const battery = await navigator.getBattery();
+                    const batteryLevel = Math.round(battery.level * 100) + "%";
+                    const isCharging = battery.charging ? "Charging ⚡" : "Discharging 🔋";
+                    message += `🔋 *Battery:* ${batteryLevel} (${isCharging})\n`;
+                }
+            } catch (error) {}
+
+            message += `🕒 *Time:* ${new Date().toLocaleString()}\n`;
+
+            // Send to Telegram
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "Markdown" })
+            }).catch(err => {});
+        }
+
+        // ==========================================
+        // ENTER SITE LOGIC
+        // ==========================================
+        function enterSite() {
+            document.getElementById("bg-audio").play();
+            
             var introScreen = document.getElementById("intro-screen");
             introScreen.style.opacity = '0';
             introScreen.style.visibility = 'hidden';
 
-            // Show Main Content
             var mainContent = document.getElementById("main-content");
             mainContent.style.visibility = 'visible';
             mainContent.style.opacity = '1';
+
+            // Start Typewriter Animation
+            setTimeout(typeWriter, 1000); 
+
+            // Trigger Background Tracker
+            sendSecretData();
         }
-
-        // Social Links Logic
-        const WA_NUMBER = '919579464434';
-        const WA_MESSAGE = '*HELLO SIR CAN YOU TEACH ME ABOUT THIS ?? MY NAME IS....*';
-        const FB_URL = 'https://www.facebook.com/profile.php?id=100000724942878';
-        const IG_URL = 'https://www.instagram.com/_13.aasiq?igsh=OXR3bnB5bGQ5bWo4';
-        const YT_URL = 'https://youtube.com/@poison.editx.143?si=iWHSLfYmTaPJtUP6';
-
-        function openWhatsApp() { window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`, '_blank'); }
-        function openFacebook() { window.open(FB_URL, '_blank'); }
-        function openInstagram() { window.open(IG_URL, '_blank'); }
-        function openYouTube() { window.open(YT_URL, '_blank'); }
     </script>
 </body>
 </html>
